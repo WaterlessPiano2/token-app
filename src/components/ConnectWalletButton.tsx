@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -15,18 +15,19 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import {
   WalletModalProvider,
+  WalletDisconnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
-import PublicKeyInput from "./PublicKeyInput";
+import { SendOneLamportToRandomAddress } from "./SendOneLamportToRandomAddress";
 
 // Default styles that can be overridden by your app
 require("@solana/wallet-adapter-react-ui/styles.css");
 
-const Wallet: FC = () => {
+export const ConnectWalletButton: FC = () => {
+
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork["mainnet-beta"];
-  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
+  const network = WalletAdapterNetwork.Devnet;
 
   // You can also provide a custom RPC endpoint.
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -52,11 +53,10 @@ const Wallet: FC = () => {
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <WalletMultiButton />
-          <PublicKeyInput nfts={async (x) => nfts(x)} />
+          <WalletDisconnectButton />
+          <SendOneLamportToRandomAddress />
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   );
 };
-
-export default Wallet;
