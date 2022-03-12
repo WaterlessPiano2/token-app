@@ -22,10 +22,9 @@ import { clusterApiUrl } from "@solana/web3.js";
 import { SendOneLamportToRandomAddress } from "./SendOneLamportToRandomAddress";
 
 // Default styles that can be overridden by your app
-require("@solana/wallet-adapter-react-ui/styles.css");
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 export const ConnectWalletButton: FC = () => {
-
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
   const network = WalletAdapterNetwork.Devnet;
 
